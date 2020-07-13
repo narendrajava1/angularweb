@@ -1,0 +1,28 @@
+<h1 id="heading">Weather </h1>
+<div id="countywise">
+<h2>Currently Selected Country {{default}}</h2>
+<label class="sbw_light">Place:</label><br />  
+<select (change)="onChange($event.target.value)">
+    <!-- <option value=''>-- Select country --</option> -->
+    <option *ngFor="let country of countries" [value]="country.code" >{{country.name}}</option>
+</select>
+
+<button id="countryweather" type="button" class="btn btn-large btn-block btn-info" (click)="searchWeatherData('Narasaraopeta')">To Know Country Wise Weather</button>
+</div>
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
