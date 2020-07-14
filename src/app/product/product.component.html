@@ -1,28 +1,36 @@
 <h1 id="heading">Weather </h1>
 <div id="countywise">
-<h2>Currently Selected Country {{default}}</h2>
-<label class="sbw_light">Place:</label><br />  
-<select (change)="onChange($event.target.value)">
-    <!-- <option value=''>-- Select country --</option> -->
-    <option *ngFor="let country of countries" [value]="country.code" >{{country.name}}</option>
-</select>
+    <h2>Currently Selected Country {{default}}</h2>
+    <label class="sbw_light">Place:</label><br />
+    <select (change)="onChange($event)">
+        <!-- <option value=''>-- Select country --</option> -->
+        <option *ngFor="let country of countries" [value]="country.code">{{country.name}}</option>
+    </select><br>
+    <select (change)="onChangeRegion($event)">
+        <!-- <option value=''>-- Select country --</option> -->
+        <option *ngFor="let region of regions" [value]="region.region">{{region.region}}</option>
+    </select>
 
-<button id="countryweather" type="button" class="btn btn-large btn-block btn-info" (click)="searchWeatherData('Narasaraopeta')">To Know Country Wise Weather</button>
+
+    <button id="countryweather" type="button" class="btn btn-large btn-block btn-info" (click)="searchWeatherData()">To
+        Know Country Wise Weather</button>
 </div>
-
-
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+<div id="weatherdata" *ngIf=showWeatherData>
+    <p>{{weather.coord.lon}}</p>
+    <p>{{weather.coord.lat}}</p>
+    <p>{{weather.place.cityName}}</p>
+    <p>{{weather.place.country}}</p>
+    <p>{{weather.place.sunrise}}</p>
+    <p>{{weather.place.sunset}}</p>
+    <p>{{weather.place.timezone}}</p>
+    <p>{{weather.weather[0].main}}</p>
+    <p>{{weather.weather[0].description}}</p>
+    <p>{{weather.tempPressure.temp}}</p>
+    <p>{{weather.tempPressure.feels_like}}</p>
+    <p>{{weather.tempPressure.temp_min}}</p>
+    <p>{{weather.tempPressure.temp_max}}</p>
+    <p>{{weather.tempPressure.pressure}}</p>
+    <p>{{weather.tempPressure.humidity}}</p>
+    <p>{{weather.tempPressure.sea_level}}</p>
+    <p>{{weather.tempPressure.windSpeed}}</p>
 </div>
-

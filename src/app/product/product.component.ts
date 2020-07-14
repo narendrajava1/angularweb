@@ -5,6 +5,8 @@ import { map } from "rxjs/operators";
 import { Country } from '../model/country';
 import { CountryStatesService } from '../services/country-states.service';
 import { Region } from '../model/region';
+import { $ } from 'protractor';
+import { Weather } from '../model/weather';
 
 @Component({
   selector: 'app-product',
@@ -12,24 +14,55 @@ import { Region } from '../model/region';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit{
-    countries:Country[];
-    region:Region[];
+    countries:Country[]=[];
+    regions:Region[]=[];
+    weather:Weather=new Weather();
     default:string="----";
+    countryId:string="In";
+    cityName:string="Hyderabad"
+    showWeatherData:boolean=false;
   constructor(private countryStatesService:CountryStatesService){}
   ngOnInit(): void {
-    this.countryStatesService.getCountries().subscribe(countryResponse=> this.countries=countryResponse);
+    // this.countryId="In";
+    // this.cityName="Hyderabad"
+    this.countryStatesService.getCountries().subscribe(countryResponse=> {
+      this.countries=countryResponse
+      // console.log(this.countries)
+    });
+    
+   
     // this.countryStatesService.getCountriesAndStates().subscribe(countryStatesResponse=>this.region);
   }
 
-  onChange($event:Event){
-
-    console.log($event)
+  onChange($event){
+    this.countryId=$event.target.value;
+      this.countryStatesService.getRegions(this.countryId).subscribe(regionResponse=> {
+        this.regions=regionResponse
+        // console.log(this.region)
+      });;
   }
 
-  searchWeatherData(cityName: string): void {
-    // this._http.get(this.API_URL + cityName + '&APPID=' + this.APPID + '&exclude=current' + '&units=metric').subscribe(response => {
-      // console.log(response);
-    // });
+  onChangeRegion($event){
+    this.cityName=$event.target.value;
+      // this.countryStatesService.getRegions(this.countryId).subscribe(regionResponse=> {
+      //   this.regions=regionResponse
+      //   // console.log(this.region)
+      // });;
+      this.countryStatesService.searchWeatherData(this.cityName,this.countryId).subscribe(weatherResponse=> {
+        this.weather=weatherResponse;
+        console.log(this.weather)
+        this.showWeatherData=true;
+        
+      });
+  }
+
+
+  searchWeatherData(): void {
+   
+  //  .subscribe(regionResponse=> {
+  //   this.region=regionResponse
+  //   // console.log(this.region)
+  // });;
   }
   
 

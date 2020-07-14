@@ -1,25 +1,23 @@
 {
-    "/api/country": {
-        "target": "http://battuta.medunes.net/api/country/all/?key=f365ef83970fa74164ba4395c5d67a9b",
+    "/api/country/all": {
+        "target": "http://battuta.medunes.net",
         "secure": false,
         "changeOrigin":true,
-        "logLevel":"debug",
-        "pathRewrite": {"^/api/country" : ""}
+        "logLevel":"debug"
+        
     },
 
-    "/api/country/state": {
-        "target": "http://battuta.medunes.net/api/region/{}/all/?key=f365ef83970fa74164ba4395c5d67a9b",
+    "/api/region": {
+        "target": "http://battuta.medunes.net",
         "secure": false,
         "changeOrigin":true,
-        "logLevel":"debug",
-        "pathRewrite": {"^/api/country/state" : ""}
+        "logLevel":"debug"
     },
-    "/api/country/state/weather": {
-        "target": "http://api.openweathermap.org/data/2.5/weather?q=West%20Bengal,In&APPID=32745a34186bc20b81f8cd7737db09bf",
+    "/data/2.5/weather": {
+        "target": "http://api.openweathermap.org",
         "secure": false,
         "changeOrigin":true,
-        "logLevel":"debug",
-        "pathRewrite": {"^/api/country/state/weather" : ""}
+        "logLevel":"debug"
     }
 
 }
